@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@layer {
+  body {
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    @apply block bg-gray-100;
+  }
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  .success {
+    @apply text-green-600;
+  }
+  .error {
+    @apply text-red-600;
+  }
+  img {
+    @apply w-full;
+  }
+}

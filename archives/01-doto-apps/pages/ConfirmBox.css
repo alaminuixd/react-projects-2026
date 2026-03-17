@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer components {
+  .confirmModalContainer {
+    @apply fixed inset-0 flex items-center justify-center bg-black/85 z-50;
+  }
+  .confirmModalBox {
+    @apply bg-white rounded-lg shadow-lg p-6 w-80 text-center;
+  }
+}

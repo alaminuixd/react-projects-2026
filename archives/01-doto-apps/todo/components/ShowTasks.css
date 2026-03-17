@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@layer {
+  .show-tasks-container {
+    @apply bg-gray-100;
+  }
+  .task-filter-container {
+    @apply w-full max-w-2xl mx-auto mb-4;
+  }
+  .task-filter-container ul {
+    @apply flex justify-between gap-1;
+  }
+  .task-filter-container ul li {
+    @apply w-full border border-gray-300 text-center py-2 cursor-pointer;
+  }
+  .task-filter-container ul li:first-child {
+    @apply rounded-tl-full rounded-bl-full;
+  }
+  .task-filter-container ul li:last-child {
+    @apply rounded-tr-full rounded-br-full;
+  }
+  .active-filter {
+    @apply bg-blue-600 text-white;
+  }
+  .task-list-container {
+    @apply mt-10 text-center;
+  }
+  .task-list-container > ul {
+    @apply bg-white text-gray-700 px-10 py-5 text-left rounded-2xl mb-5 shadow-[0_0_3px_rgba(0,0,0,0.1)];
+  }
+  .task-list-container > ul > li {
+    @apply flex justify-between items-center;
+  }
+  .task-list-container > ul > li h3 {
+    @apply pb-3;
+  }
+  .task-settings {
+    @apply flex items-center justify-between gap-5 m-0 p-0;
+  }
+  .task-settings li {
+    @apply cursor-pointer;
+  }
+  .update-input-container {
+    @apply w-full py-5 flex items-center justify-between gap-4;
+  }
+
+  .update-input-wrapper {
+    @apply flex items-center gap-4 flex-1;
+  }
+
+  /* Text Input */
+  .update-input-wrapper input {
+    @apply w-full bg-white text-gray-800 border border-gray-300 px-5 py-2.5 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400;
+  }
+
+  /* Select (closed state) */
+  .update-input-wrapper select {
+    @apply bg-white text-gray-800 border border-gray-300
+           px-4 py-2.5 rounded-full
+           focus:outline-none focus:ring-2 focus:ring-blue-400;
+  }
+
+  /* Dropdown options */
+  .update-input-wrapper select option {
+    @apply text-black bg-white px-10 mt-5;
+  }
+
+  /* Update Button */
+  .update-input-container button {
+    @apply bg-black text-white
+           px-6 py-2.5 rounded-full
+           hover:bg-blue-700 
+           active:scale-95
+           transition-all duration-200 font-medium;
+  }
+}

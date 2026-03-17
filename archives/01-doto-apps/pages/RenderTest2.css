@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer components {
+  .render-test2-container {
+    @apply w-full max-w-7xl mx-auto my-5;
+  }
+  .task2-container {
+    @apply w-full max-w-4xl mx-auto flex flex-col gap-5;
+  }
+  .task2-container > li {
+    @apply flex justify-between items-center p-7 shadow-[0_0_3px_rgba(0,0,0,0.2)] rounded-2xl;
+  }
+  .task2-container > li > ul {
+    @apply flex justify-between gap-7 items-center;
+  }
+  .task2-container > li > ul > li {
+    @apply cursor-pointer;
+  }
+}

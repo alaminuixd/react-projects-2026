@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@layer {
+  .containerMain {
+    @apply w-full;
+  }
+  .topHeader {
+    @apply w-full mx-auto bg-gray-200 py-10;
+  }
+  .topHeader nav {
+    @apply flex justify-between;
+  }
+  .topHeader nav ul {
+    @apply flex justify-between gap-3;
+  }
+}
+a {
+  text-decoration: none;
+}
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid #6b1919;
+}

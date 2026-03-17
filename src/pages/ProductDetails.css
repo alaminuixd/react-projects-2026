@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer components {
+  .product-details-container {
+    @apply w-full max-w-4xl mx-auto;
+  }
+  .product-details-container > div.section-1 {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-5;
+  }
+  .product-image-container {
+    @apply w-full border border-gray-200 cursor-pointer;
+  }
+  .product-image-main {
+    @apply relative text-gray-500;
+  }
+  .product-image-main button {
+    /* default style for all image hover buttons */
+    @apply p-3 border border-gray-300 rounded-full transition cursor-pointer z-40;
+  }
+  .product-image-main > button {
+    @apply absolute opacity-0 group-hover:opacity-100;
+  }
+  .product-image-main > button.zoom {
+    @apply bottom-3 left-3;
+  }
+
+  .product-image-main > button.zoom span {
+    @apply absolute opacity-0 group-hover/zoom:opacity-100 bottom-12 left-6 -translate-x-1/2 whitespace-nowrap bg-black text-white text-xs px-3 py-2 rounded transition pointer-events-none;
+  }
+  .product-image-main > button.left-arrow,
+  .product-image-main > button.right-arrow {
+    @apply top-[50%] translate-y-1/2 opacity-0 group-hover:opacity-100 pointer-events-auto;
+  }
+  .product-image-main > button.left-arrow {
+    @apply left-3;
+  }
+  .product-image-main > button.right-arrow {
+    @apply right-3;
+  }
+  /* Right side panel */
+  /* Breadcrumb */
+  .breadcrumb {
+    @apply flex uppercase mb-3 text-gray-500;
+  }
+  .breadcrumb span {
+    @apply text-[12px] mx-2 text-gray-300;
+  }
+  /*  Section 2 | tabs area */
+  .section-2 {
+    @apply mt-10 flex gap-5;
+  }
+  .active-filter {
+    @apply border-b border-b-2 border-b-blue-600 pb-2;
+  }
+}

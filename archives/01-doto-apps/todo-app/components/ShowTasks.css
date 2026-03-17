@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer {
+  .show-tasks-container {
+    @apply bg-gray-100 border border-gray-200 p-10;
+  }
+  .task-filter-container {
+    @apply w-full max-w-2xl mx-auto mb-4;
+  }
+  .task-filter-container ul {
+    @apply flex justify-between gap-1;
+  }
+  .task-filter-container ul li {
+    @apply w-full border border-gray-300 text-center py-2 cursor-pointer;
+  }
+  .task-filter-container ul li:first-child {
+    @apply rounded-tl-full rounded-bl-full;
+  }
+  .task-filter-container ul li:last-child {
+    @apply rounded-tr-full rounded-br-full;
+  }
+  .active-filter {
+    @apply bg-blue-600 text-white;
+  }
+  .task-list-container {
+    @apply mt-10 text-center;
+  }
+  .task-list-container > div > ul {
+    @apply bg-blue-600 text-white px-10 py-5 text-left rounded-2xl mb-5;
+  }
+  .task-list-container > div > ul > li {
+    @apply flex justify-between items-center;
+  }
+  .task-list-container > div > ul > li h3 {
+    @apply pb-3;
+  }
+  .task-settings {
+    @apply flex items-center justify-between gap-5 m-0 p-0;
+  }
+  .task-settings li {
+    @apply cursor-pointer;
+  }
+}

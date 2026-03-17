@@ -1,0 +1,39 @@
+.social-share {
+  display: flex;
+  gap: 12px;
+}
+
+.social-share-button {
+  position: relative;
+  font-size: 17px;
+  color: #bdbdbd;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+  border: 1px solid #bdbdbd;
+  padding: 7px;
+  border-radius: 50%;
+}
+
+.social-share-button:hover {
+  transform: scale(1.15);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.social-share-button:hover .tooltip {
+  opacity: 1;
+}

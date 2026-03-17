@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer {
+  .wrapper {
+    @apply w-full max-w-7xl mx-auto my-10 p-10;
+  }
+}

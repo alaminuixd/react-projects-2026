@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@layer components {
+  .dragable-container-active {
+    @apply fixed inset-0 bg-black/80 z-[9999] flex items-center justify-center overflow-hidden;
+  }
+  .dragable-container-non-active {
+    @apply absolute inset-0 flex justify-center overflow-hidden;
+  }
+  .dragable-container {
+    @apply flex justify-center items-center;
+  }
+
+  .dragable-img-wrapper {
+    @apply overflow-hidden w-full max-w-3xl h-100 sm:h-140 md:h-195 bg-amber-300;
+  }
+
+  .dragable-img-wrapper > img {
+    @apply w-full h-full object-cover select-none;
+  }
+}
