@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { menus, childrenMap } from "../assets/menu.data";
+import { menus, childrenMap } from "../assets/data";
 import MenuItem from "../components/MenuItem";
 import { buildMenuTree } from "../utils/buildMenuTree";
 import "./Layout.css";
@@ -11,7 +11,6 @@ const LayoutMain = () => {
   console.log(path);
   // menu tree
   const menuTree = useMemo(() => buildMenuTree(menus, childrenMap), []);
-  console.log(menuTree.map((m) => m.text));
   return (
     <div className="containerMain">
       <header className="topHeader">
@@ -20,9 +19,27 @@ const LayoutMain = () => {
             <h3>Brand Logo</h3>
           </Link>
           <ul>
-            {menuTree.map((item) => (
-              <MenuItem key={item.id} item={item} depth={0} />
-            ))}
+            <li>
+              <Link to={"/"} className={path === "/" ? "active" : ""}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/products"}
+                className={path === "/products" ? "active" : ""}
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/dragable"}
+                className={path === "/dragable" ? "active" : ""}
+              >
+                Dragable
+              </Link>
+            </li>
           </ul>
         </nav>
       </header>

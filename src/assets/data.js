@@ -365,13 +365,24 @@ const products = [
   },
 ];
 
-export const singleProduct = {
-  breadcrumb: [
-    { text: "home", link: "/" },
-    { text: "shop", link: "/products" },
-    { text: "men", link: "/products/men" },
-    { text: "tshirt", link: "/products/men/tshirt" },
-  ],
-};
+/* export const menus = [
+  { id: 1, text: "home", link: "#" },
+  { id: 2, text: "about", link: "#" },
+  { id: 3, text: "all products", link: "#" },
+  { id: 4, text: "men", link: "#" },
+  { id: 5, text: "women", link: "#" },
+  { id: 6, text: "kids", link: "#" },
+];
+
+export const childrenMap = [
+  {
+    id: 1,
+    children: [2, 3],
+  },
+  {
+    id: 4,
+    children: [5, 6],
+  },
+]; */
 
 export default products;

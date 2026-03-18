@@ -10,9 +10,24 @@
   .topHeader nav {
     @apply flex justify-between;
   }
-  .topHeader nav ul {
-    @apply flex justify-between gap-6;
+  .topHeader nav > ul {
+    @apply flex justify-between gap-6 p-0 m-0;
   }
+  .topHeader nav > ul > li {
+    @apply relative m-0 p-0;
+  }
+  .topHeader nav > ul > li > ul {
+    @apply hidden absolute z-401 bg-white shadow-[0_0_2px_rgba(0,0,0,0.2)] left-[50%] translate-x-[-50%];
+    /* padding: 0 !important; */
+  }
+  .topHeader nav > ul > li:hover ul {
+    @apply block;
+  }
+  .topHeader nav > ul > li > ul > li {
+    @apply py-2 my-2;
+  }
+
+  /* Main Area Style */
   .mainArea {
     @apply relative w-full min-h-[80vh];
   }

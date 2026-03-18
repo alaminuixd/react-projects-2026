@@ -9,7 +9,7 @@ body {
 .container {
   width: 100%;
   margin: auto;
-  background: rebeccapurple url("images/bg-pattern.avif");
+  background: rebeccapurple url(/* "images/bg-pattern.avif" */);
   height: 100dvh;
   display: flex;
   align-items: center;
