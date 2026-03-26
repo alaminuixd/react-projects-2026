@@ -12,6 +12,7 @@ export const menus = [
   { id: 11, text: "Account", link: "/account" },
   { id: 12, text: "Orders", link: "/orders" },
   { id: 13, text: "Wishlist", link: "/wishlist" },
+  { id: 14, text: "contact", link: "/contact" },
 ];
 
 export const childrenMap = [

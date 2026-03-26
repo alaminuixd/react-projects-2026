@@ -8,10 +8,10 @@ import "./Layout.css";
 const LayoutMain = () => {
   const location = useLocation();
   const path = location.pathname;
-  console.log(path);
+  // console.log(path);
   // menu tree
   const menuTree = useMemo(() => buildMenuTree(menus, childrenMap), []);
-  console.log(menuTree.map((m) => m.text));
+  // console.log(menuTree.map((m) => m.text));
   return (
     <div className="containerMain">
       <header className="topHeader">

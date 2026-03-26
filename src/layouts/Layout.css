@@ -8,7 +8,7 @@
     @apply w-full mx-auto bg-gray-200 py-10;
   }
   .topHeader nav {
-    @apply flex justify-between;
+    @apply max-w-7xl flex justify-between;
   }
   .topHeader nav > ul {
     @apply flex justify-between gap-6 p-0 m-0;

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer components {
+  .contact-container {
+    @apply w-full max-w-2xl mx-auto bg-amber-50 mt-10 p-13 shadow rounded-md;
+  }
+  .contact-container form > div {
+    @apply flex items-center gap-3 mb-5;
+  }
+  .contact-container form > div > label {
+    @apply w-full max-w-[22%] text-right;
+  }
+  .contact-container form > div > input {
+    @apply w-full max-w-[78%] px-5 py-2 border border-gray-400 rounded-full;
+  }
+  .contact-container form > button {
+    @apply text-center bg-blue-700 text-white mt-5 px-10 py-4 w-full rounded-full;
+  }
+}

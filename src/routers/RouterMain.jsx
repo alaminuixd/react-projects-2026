@@ -9,6 +9,9 @@ import MenProducts from "../pages/MenProducts";
 import MenTshirt from "../pages/MenTshirt";
 import WomenProducts from "../pages/WomenProducts";
 import WomenTshirt from "../pages/WomenTshirt";
+import NotFound from "../pages/NotFound";
+import Contact from "../pages/Contact";
+import DynamicForm2 from "../pages/DynamicForm2";
 
 const RouterMain = () => {
   const routerMain = createBrowserRouter([
@@ -29,6 +32,10 @@ const RouterMain = () => {
         { path: "products/women/tshirt", element: <WomenTshirt /> },
 
         { path: "products/:id", element: <ProductDetails /> },
+
+        { path: "contact", element: <DynamicForm2 /> },
+
+        { path: "*", element: <NotFound /> },
       ],
     },
   ]);
