@@ -23,6 +23,14 @@ const InputApp = () => {
       [key]: value,
     }));
   };
+
+  const handleInputByObject = (obj) => {
+    setInputState((prev) => ({
+      ...prev,
+      ...obj,
+    }));
+  };
+
   console.log(inputState);
   return (
     <div className="input-app-container ">
@@ -31,13 +39,13 @@ const InputApp = () => {
         <input
           type="number"
           name="a"
-          onChange={(e) => handleInutFields("a", e.target.value)}
+          onChange={(e) => handleInputByObject({ a: e.target.value })}
           value={inputState.a}
         />
         <input
           type="number"
           name="b"
-          onChange={(e) => handleInutFields("b", e.target.value)}
+          onChange={(e) => handleInputByObject({ b: e.target.value })}
           value={inputState.b}
         />
       </div>
