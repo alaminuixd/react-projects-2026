@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer components {
+  .done {
+    @apply border-green-600 bg-green-100;
+  }
+  .cancelled {
+    @apply border-red-600 bg-red-100;
+  }
+  .progress {
+    @apply border-amber-500 bg-amber-100;
+  }
+  .just {
+    @apply border-blue-600 bg-blue-100;
+  }
+}

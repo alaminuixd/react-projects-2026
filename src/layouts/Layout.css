@@ -17,7 +17,7 @@
     @apply relative m-0 p-0;
   }
   .topHeader nav > ul > li > ul {
-    @apply hidden absolute z-401 bg-white shadow-[0_0_2px_rgba(0,0,0,0.2)] left-[50%] translate-x-[-50%];
+    @apply hidden absolute z-401 bg-white shadow-[0_0_2px_rgba(0,0,0,0.2)] left-[50%] translate-x-[-50%] whitespace-nowrap;
     /* padding: 0 !important; */
   }
   .topHeader nav > ul > li:hover ul {

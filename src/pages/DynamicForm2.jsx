@@ -10,7 +10,7 @@ const mapped = entries.map((entry) => {
 });
 
 const initialState = Object.fromEntries(mapped);
-console.log(initialState);
+// console.log(initialState);
 
 const DynamicForm2 = () => {
   const [formData, setFormData] = useState(initialState);

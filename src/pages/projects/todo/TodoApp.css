@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer components {
+  .todo-app-container {
+    @apply text-gray-700 bg-white;
+  }
+  .card-container {
+    @apply bg-white;
+  }
+}

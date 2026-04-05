@@ -12,6 +12,10 @@ import WomenTshirt from "../pages/WomenTshirt";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import DynamicForm2 from "../pages/DynamicForm2";
+import CheckList from "../pages/CheckList";
+import TestProducts from "../pages/TestProducts";
+import TodoApp from "../pages/projects/todo/TodoApp";
+import InputApp from "../pages/projects/input-app/InputApp";
 
 const RouterMain = () => {
   const routerMain = createBrowserRouter([
@@ -33,7 +37,13 @@ const RouterMain = () => {
 
         { path: "products/:id", element: <ProductDetails /> },
 
+        { path: "checklist", element: <CheckList /> },
+
         { path: "contact", element: <DynamicForm2 /> },
+
+        { path: "test/products", element: <TestProducts /> },
+        { path: "test/todo", element: <TodoApp /> },
+        { path: "test/inputapp", element: <InputApp /> },
 
         { path: "*", element: <NotFound /> },
       ],

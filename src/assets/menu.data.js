@@ -12,7 +12,12 @@ export const menus = [
   { id: 11, text: "Account", link: "/account" },
   { id: 12, text: "Orders", link: "/orders" },
   { id: 13, text: "Wishlist", link: "/wishlist" },
-  { id: 14, text: "contact", link: "/contact" },
+  { id: 14, text: "Checklist", link: "/checklist" },
+  { id: 15, text: "Contact", link: "/contact" },
+  { id: 16, text: "Expriment", link: "#" },
+  { id: 17, text: "Test Products", link: "test/products" },
+  { id: 18, text: "Todo Tasks", link: "test/todo" },
+  { id: 19, text: "Input App", link: "test/inputapp" },
 ];
 
 export const childrenMap = [
@@ -20,4 +25,5 @@ export const childrenMap = [
   { id: 3, children: [5, 6] },
   { id: 4, children: [7, 8, 9] },
   { id: 11, children: [12, 13] },
+  { id: 16, children: [17, 18, 19] },
 ];
