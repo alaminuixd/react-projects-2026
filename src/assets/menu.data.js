@@ -18,6 +18,7 @@ export const menus = [
   { id: 17, text: "Test Products", link: "test/products" },
   { id: 18, text: "Todo Tasks", link: "test/todo" },
   { id: 19, text: "Input App", link: "test/inputapp" },
+  { id: 20, text: "Contact App", link: "text/contact-app" },
 ];
 
 export const childrenMap = [
@@ -25,5 +26,5 @@ export const childrenMap = [
   { id: 3, children: [5, 6] },
   { id: 4, children: [7, 8, 9] },
   { id: 11, children: [12, 13] },
-  { id: 16, children: [17, 18, 19] },
+  { id: 16, children: [17, 18, 19, 20] },
 ];

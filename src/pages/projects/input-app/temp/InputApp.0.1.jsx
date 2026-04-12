@@ -3,13 +3,12 @@
  * DONE: Handle operations
  * DONE: Handle a list of history
  * DONE: Render history list
- * DONE: Restor the history
+ * TODO: Restor the history
  */
 import React, { useEffect, useState } from "react";
 import "./InputApp.css";
 import { v4 as uuidv4 } from "uuid";
-import formatDateTime from "../../../utils/format/formatDateTime";
-import InputFields from "./InputFields";
+import formatDateTime from "../../../../utils/format/formatDateTime";
 
 const initialInputState = {
   a: 0,
@@ -73,7 +72,29 @@ const InputApp = () => {
     };
 
     setHistories((prev) => [...prev, historyItem]);
-    // console.log(histories);
+  };
+
+  // Clear History Item
+  const clearHistoryitem = (id) => {
+    setHistories((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, cleared: true } : item)),
+    );
+  };
+
+  // Restore Cleared History Item
+  const restoreHistoryitem = (id) => {
+    setHistories((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, cleared: false } : item)),
+    );
+  };
+
+  // Toggle Clear and Restor the histories
+  const toggleHandleHistory = (history) => {
+    if (history.cleared) {
+      restoreHistoryitem(history.id);
+    } else {
+      clearHistoryitem(history.id);
+    }
   };
 
   // Toggle Clear and Restor the history v2
@@ -85,62 +106,37 @@ const InputApp = () => {
     });
   };
 
-  // Restore input
-  const restoreInput = (id) => {
-    const historyItem = histories.find((history) => history.id === id);
-    if (!historyItem) return;
-
-    const operation = historyItem.operation.replace(/\s+/g, "");
-    // console.log(operation);
-    const operator = ["+", "-", "*", "/", "%"].find((op) =>
-      operation.includes(op),
-    );
-    // console.log(operator);
-    if (!operator) return;
-    const [a, b] = operation.split(operator);
-    setInputState({
-      a: Number(a),
-      b: Number(b),
-    });
-  };
-  /*   const historyItem = {
-      id: uuidv4(),
-      createdAt: new Date().toISOString(),
-      operation: `${a} ${operator} ${b}`,
-      res: operationResult,
-      cleared: false,
-    }; */
-
-  // This function was exprimental which is still undergoing.
-  const RestorInputNumber = (id) => {
-    const foundItem = histories
-      .find((item) => item.id === id)
-      .operation.replace(/\s+/g, "");
-    if (!foundItem) return;
-
-    const foundOperator = ["+", "-", "*", "/"].find((op) =>
-      foundItem.includes(op),
-    );
-
-    const [a, b] = foundItem.split(foundOperator);
-
-    const result = operations[foundOperator](Number(a), Number(b));
-    console.log(result);
-  };
-
-  /*   useEffect(() => {
-    console.log(histories);
-  }, [histories]); */
+  useEffect(() => {}, []);
 
   return (
     <div className="input-app-container ">
       <h1>Result: {result}</h1>
-      <InputFields
-        handleInputChange={handleInputChange}
-        inputState={inputState}
-        handleArithmeticOperation={handleArithmeticOperation}
-        handleClearInput={handleClearInput}
-      />
+      <div>
+        <input
+          type="number"
+          name="a"
+          onChange={handleInputChange}
+          value={inputState.a}
+        />
+        <input
+          type="number"
+          name="b"
+          onChange={handleInputChange}
+          value={inputState.b}
+        />
+      </div>
+      <div>
+        <p>Operations:</p>
+        <div>
+          <button onClick={(e) => handleArithmeticOperation("+")}>+</button>
+          <button onClick={(e) => handleArithmeticOperation("-")}>-</button>
+          <button onClick={(e) => handleArithmeticOperation("*")}>
+            <span>*</span>
+          </button>
+          <button onClick={(e) => handleArithmeticOperation("/")}>/</button>
+          <button onClick={handleClearInput}>clear</button>
+        </div>
+      </div>
       <div className="history-container">
         <h3>History</h3>
         <div className="history-result">
@@ -175,12 +171,15 @@ const InputApp = () => {
                       formatDateTime(history.createdAt)
                     )}
                   </small>
-                  <button
-                    disabled={history.cleared}
-                    onClick={() => restoreInput(history.id)}
-                  >
-                    Restore Input
+                  {/* <button onClick={() => clearHistoryitem(history.id)}>
+                    Clear
                   </button>
+                  <button onClick={() => restoreHistoryitem(history.id)}>
+                    Restor
+                  </button> */}
+                  {/* <button onClick={() => toggleHandleHistory(history)}>
+                    {history.cleared ? "Restore" : "Clear"}
+                  </button> */}
                   <button
                     onClick={() => toggleHistory(history.id, history.cleared)}
                   >

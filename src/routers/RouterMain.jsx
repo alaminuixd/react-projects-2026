@@ -16,6 +16,7 @@ import CheckList from "../pages/CheckList";
 import TestProducts from "../pages/TestProducts";
 import TodoApp from "../pages/projects/todo/TodoApp";
 import InputApp from "../pages/projects/input-app/InputApp";
+import ContactApp from "../pages/projects/contact-app/ContactApp";
 
 const RouterMain = () => {
   const routerMain = createBrowserRouter([
@@ -44,6 +45,7 @@ const RouterMain = () => {
         { path: "test/products", element: <TestProducts /> },
         { path: "test/todo", element: <TodoApp /> },
         { path: "test/inputapp", element: <InputApp /> },
+        { path: "text/contact-app", element: <ContactApp /> },
 
         { path: "*", element: <NotFound /> },
       ],
