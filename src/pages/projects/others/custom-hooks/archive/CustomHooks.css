@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@layer components {
+  .custom-hooks-container {
+    @apply w-full max-w-3xl mx-auto my-10;
+  }
+  .custom-hooks-container > h1 {
+    @apply text-center font-bold;
+  }
+  .custom-hooks-container .buttonset {
+    @apply my-2 flex gap-5 justify-center items-center;
+  }
+  .custom-hooks-container .result1 {
+    @apply text-center mt-5 bg-gray-200 py-5 w-30 rounded-full text-2xl;
+  }
+}

@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer components {
+  .blog-one-container {
+    @apply w-full max-w-4xl mx-auto;
+  }
+  .blog-one-container h1 {
+    @apply text-center my-5;
+  }
+  .blog-one-container > div:nth-of-type(1) {
+    @apply my-10 text-gray-700;
+  }
+  .blog-one-container > div:nth-of-type(1) h2 {
+    @apply font-bold my-3;
+  }
+  .blog-one-container > div:nth-of-type(2) {
+    @apply flex gap-5;
+  }
+  .blog-one-container button {
+    @apply text-center bg-blue-700 text-white mt-5 px-10 py-3 rounded-full cursor-pointer;
+  }
+}

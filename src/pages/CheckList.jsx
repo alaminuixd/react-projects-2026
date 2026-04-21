@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ListItem = ({ title, name, checked, setIsChecked }) => {
@@ -43,6 +43,7 @@ const listData = [
 
 const CheckList = () => {
   const [lists, setLists] = useState(listData);
+  const [count, setCount] = useState(0);
 
   const toggleChecked = (id) => {
     setLists((prev) =>
@@ -52,9 +53,27 @@ const CheckList = () => {
     );
   };
 
+  const title = document.getElementsByTagName("title");
+  title[0].innerText = "How are you doing";
+
+  /*   useEffect(() => {
+    document.title = `Your count value is ${count}`;
+  }, [count]); */
+
+  /* const checkListId = document.getElementById("checkList");
+  if (checkListId !== null) {
+    checkListId.innerText += " is here";
+  } */
+  useEffect(() => {
+    const checkListId = document.getElementById("checkList");
+    checkListId.innerText = "Check List Using JSON Data";
+  }, []);
+
   return (
     <div className="w-full max-w-4xl mx-auto mt-10">
-      <h1 className="text-center">CheckList</h1>
+      <h1 className="text-center" id="checkList">
+        CheckList
+      </h1>
 
       <ul className="mt-10">
         {lists.map((list) => (
@@ -67,6 +86,15 @@ const CheckList = () => {
           />
         ))}
       </ul>
+      <div className="mt-10">
+        <div className="my-5 text-center">{count}</div>
+        <button
+          className="border border-gray-500 px-15 py-3 rounded-full cursor-pointer"
+          onClick={(e) => setCount((prev) => prev + 1)}
+        >
+          Count
+        </button>
+      </div>
     </div>
   );
 };

@@ -19,6 +19,10 @@ export const menus = [
   { id: 18, text: "Todo Tasks", link: "test/todo" },
   { id: 19, text: "Input App", link: "test/inputapp" },
   { id: 20, text: "Contact App", link: "text/contact-app" },
+  { id: 21, text: "Blog One", link: "text/blog-one" },
+  { id: 22, text: "Custom Hooks", link: "text/custom-hooks" },
+  { id: 23, text: "API Call One", link: "text/api-call-one" },
+  { id: 24, text: "App Inputs", link: "text/app-inputs" },
 ];
 
 export const childrenMap = [
@@ -26,5 +30,5 @@ export const childrenMap = [
   { id: 3, children: [5, 6] },
   { id: 4, children: [7, 8, 9] },
   { id: 11, children: [12, 13] },
-  { id: 16, children: [17, 18, 19, 20] },
+  { id: 16, children: [17, 18, 19, 20, 21, 22, 23, 24] },
 ];

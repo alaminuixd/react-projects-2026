@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer components {
+  .app-inputs-container {
+    @apply w-full max-w-3xl mx-auto my-10;
+  }
+  .app-inputs-container h1 {
+    @apply my-10 text-center font-medium text-gray-600;
+  }
+  .app-inputs-container form {
+    @apply p-0;
+  }
+  .app-inputs-container form > div {
+    @apply flex flex-col my-5 px-7 py-5 shadow-[0_0_2px_rgba(0,0,0,0.2)] rounded-md;
+  }
+  .app-inputs-container form > div > label {
+    @apply font-medium text-gray-600;
+  }
+  .app-inputs-container form > div > input[type="text"] {
+    @apply px-5 py-2 border border-gray-300 mt-2;
+  }
+  .app-inputs-container form > div > input::placeholder {
+    @apply text-gray-400 font-light;
+  }
+  .app-inputs-container form .error-message {
+    @apply text-red-600 text-sm pt-2;
+  }
+}

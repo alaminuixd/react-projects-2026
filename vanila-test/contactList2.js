@@ -1,9 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./ContactApp.css";
-import ContactForm from "./Components/ContactForm";
-import ShowContacts from "./Components/ShowContacts";
-
-const iniContValueArr = [
+const contacts = [
   {
     id: "5f544dd7-28ab-47a9-885c-da47b74632cb",
     fullName: "Jhon Doe",
@@ -66,32 +61,52 @@ const iniContValueArr = [
   },
 ];
 
-const ContactApp = () => {
-  const [contacts, setContacts] = useState([...iniContValueArr]);
-  // handler functions for lifting state
-  const generateContacts = (formData) => {
-    setContacts((prev) => [...prev, formData]);
-    // setContacts([].concat(contacts, formData));
-  };
+const container = document.getElementById("container");
+const btnChangeData = document.createElement("button");
+const btnChangeFilter = document.createElement("button");
 
-  useEffect(() => {
-    // console.log(`Name: ${contacts?.fullName} | Email: ${contacts?.email}`);
-    // console.log(contacts);
-  }, [contacts]);
-  useEffect(() => {
-    console.log("Component mounted");
-
-    return () => {
-      console.log("Component unmounted");
-    };
-  }, []);
-  return (
-    <div className="contact-app-container">
-      <h1 className="text-center">ContactApp</h1>
-      <ContactForm getData={generateContacts} />
-      <ShowContacts contacts={contacts} />
-    </div>
-  );
+// Function: apply style to an element
+const applyStyle = (elArray, style) => {
+  if (!Array.isArray(elArray)) throw Error("Firt argument must be an array");
+  elArray.forEach((el) => Object.assign(el.style, style));
 };
 
-export default ContactApp;
+const buttonStyle = {
+  border: "none",
+  padding: "15px 40px",
+  cursor: "pointer",
+  borderRadius: "30px",
+  backgroundColor: "#333",
+  color: "#FFF",
+  fontFamily: "Poppins, Arial",
+  fontSize: "17px",
+  fontWeight: "bold",
+};
+
+const eventStyles = {
+  mouseover: { backgroundColor: "#222" },
+  mouseout: { backgroundColor: "#333" },
+  mousedown: { backgroundColor: "#333" },
+  mouseup: { backgroundColor: "#222" },
+};
+
+applyStyle([btnChangeData, btnChangeFilter], buttonStyle);
+
+console.log(Object.entries(eventStyles));
+const buttons = [btnChangeData, btnChangeFilter];
+
+Object.entries(eventStyles).forEach(([key, val]) => {
+  buttons.forEach((button) => {
+    button.addEventListener(key, (e) => {
+      applyStyle(e.currentTarget, { ...val, transition: "all" });
+    });
+  });
+});
+
+btnChangeData.innerText = "Change Data";
+btnChangeFilter.innerText = "Change Filter";
+container.append(btnChangeData, btnChangeFilter);
+
+let filter = "all";
+
+btnChangeData.addEventListener("click", (e) => {});

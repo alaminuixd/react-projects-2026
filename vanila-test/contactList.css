@@ -1,0 +1,16 @@
+.filter-container {
+  width: 100%;
+  max-width: 400px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+.filter-container > li {
+  background-color: #007aee;
+  padding: 7px 20px;
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+}

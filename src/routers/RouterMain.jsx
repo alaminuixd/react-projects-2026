@@ -4,19 +4,23 @@ import LayoutMain from "../layouts/LayoutMain";
 import Home from "../pages/Home";
 import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
-import Dragable from "../pages/Dragable";
 import MenProducts from "../pages/MenProducts";
 import MenTshirt from "../pages/MenTshirt";
 import WomenProducts from "../pages/WomenProducts";
 import WomenTshirt from "../pages/WomenTshirt";
 import NotFound from "../pages/NotFound";
-import Contact from "../pages/Contact";
 import DynamicForm2 from "../pages/DynamicForm2";
-import CheckList from "../pages/CheckList";
 import TestProducts from "../pages/TestProducts";
 import TodoApp from "../pages/projects/todo/TodoApp";
 import InputApp from "../pages/projects/input-app/InputApp";
 import ContactApp from "../pages/projects/contact-app/ContactApp";
+import JqueryTest from "../pages/JqueryTest";
+import BlogOne from "../pages/projects/blog-one/BlogOne";
+import CustomHooks from "../pages/projects/others/custom-hooks/CustomHooks";
+import ApiCallOne from "../pages/projects/api-call-one/ApiCallOne";
+import AppInputs from "../pages/projects/app-inputs/AppInputs";
+import SimpleFocusGuard from "../pages/projects/app-inputs/SimpleFocusGuard";
+import FocusGuard2 from "../pages/projects/app-inputs/FocusGuard2";
 
 const RouterMain = () => {
   const routerMain = createBrowserRouter([
@@ -38,14 +42,27 @@ const RouterMain = () => {
 
         { path: "products/:id", element: <ProductDetails /> },
 
-        { path: "checklist", element: <CheckList /> },
+        { path: "checklist", element: <JqueryTest /> },
 
         { path: "contact", element: <DynamicForm2 /> },
 
         { path: "test/products", element: <TestProducts /> },
+
         { path: "test/todo", element: <TodoApp /> },
+
         { path: "test/inputapp", element: <InputApp /> },
+
         { path: "text/contact-app", element: <ContactApp /> },
+
+        { path: "text/blog-one", element: <BlogOne /> },
+
+        { path: "text/custom-hooks", element: <CustomHooks /> },
+
+        { path: "text/api-call-one", element: <ApiCallOne /> },
+
+        { path: "text/app-inputs", element: <AppInputs /> },
+        // { path: "text/app-inputs", element: <SimpleFocusGuard /> },
+        // { path: "text/app-inputs", element: <FocusGuard2 /> },
 
         { path: "*", element: <NotFound /> },
       ],

@@ -1,9 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./ContactApp.css";
-import ContactForm from "./Components/ContactForm";
-import ShowContacts from "./Components/ShowContacts";
-
-const iniContValueArr = [
+const contacts = [
   {
     id: "5f544dd7-28ab-47a9-885c-da47b74632cb",
     fullName: "Jhon Doe",
@@ -66,32 +61,49 @@ const iniContValueArr = [
   },
 ];
 
-const ContactApp = () => {
-  const [contacts, setContacts] = useState([...iniContValueArr]);
-  // handler functions for lifting state
-  const generateContacts = (formData) => {
-    setContacts((prev) => [...prev, formData]);
-    // setContacts([].concat(contacts, formData));
-  };
-
-  useEffect(() => {
-    // console.log(`Name: ${contacts?.fullName} | Email: ${contacts?.email}`);
-    // console.log(contacts);
-  }, [contacts]);
-  useEffect(() => {
-    console.log("Component mounted");
-
-    return () => {
-      console.log("Component unmounted");
-    };
-  }, []);
-  return (
-    <div className="contact-app-container">
-      <h1 className="text-center">ContactApp</h1>
-      <ContactForm getData={generateContacts} />
-      <ShowContacts contacts={contacts} />
-    </div>
-  );
+const container = document.getElementById("container");
+const btnChangeData = document.createElement("button");
+const buttonStyle = {
+  border: "none",
+  padding: "15px 40px",
+  cursor: "pointer",
+  borderRadius: "30px",
+  backgroundColor: "#333",
+  color: "#FFF",
+  fontFamily: "Poppins, Arial",
+  fontSize: "17px",
+  fontWeight: "bold",
 };
+Object.assign(btnChangeData.style, buttonStyle);
 
-export default ContactApp;
+function applyStyleByEvent(element, event) {
+  element.addEventListener(event, (e) => {
+    const theStyle = {
+      backgroundColor:
+        event === "mouseover"
+          ? "#222"
+          : event === "mouseout"
+            ? "#333"
+            : event === "mousedown"
+              ? "#333"
+              : event === "mouseup"
+                ? "#222"
+                : "",
+      transition: "all",
+    };
+    Object.assign(e.target.style, theStyle);
+  });
+}
+
+document.addEventListener("focus", () => {});
+
+applyStyleByEvent(btnChangeData, "mouseover");
+applyStyleByEvent(btnChangeData, "mouseout");
+applyStyleByEvent(btnChangeData, "mousedown");
+applyStyleByEvent(btnChangeData, "mouseup");
+
+btnChangeData.innerText = "Change Data";
+
+container.appendChild(btnChangeData);
+
+const filter = "all";

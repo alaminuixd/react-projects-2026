@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@layer {
+@layer base {
   * {
     box-sizing: border-box;
   }
@@ -33,5 +33,11 @@
     color: #666666;
     cursor: not-allowed; /* Shows a 'no entry' sign on hover */
     opacity: 0.6; /* Makes the button appear faded */
+  }
+  .btn-blue {
+    @apply text-center bg-blue-700 text-white mt-5 px-10 py-3 rounded-full cursor-pointer;
+  }
+  input {
+    @apply border border-gray-300 my-1 px-4 py-2;
   }
 }
