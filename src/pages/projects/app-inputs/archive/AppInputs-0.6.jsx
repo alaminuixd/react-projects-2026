@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deepClone, objectFrom } from "./utils/objectHelpers";
+import { deepClone, objectFrom } from "../utils/objectHelpers";
 const iniState = {
   title: {
     value: "",

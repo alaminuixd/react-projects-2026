@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deepClone } from "./utils/objectHelpers";
+import { deepClone, objectFrom } from "../utils/objectHelpers";
 const iniState = {
   title: {
     value: "",
@@ -20,105 +20,76 @@ const iniState = {
 const AppInputs = () => {
   const [state, setState] = useState({ ...iniState });
 
-  const validateFields = (values) => {
-    const foundErrors = {};
-
-    const { title, bio, skills } = values;
-
-    if (!title.trim()) {
-      foundErrors.title = "Invalid title";
-    }
-    if (!bio.trim()) {
-      foundErrors.bio = "Invalid boi";
-    }
-    if (!skills.trim()) {
-      foundErrors.skills = "Invalid skills";
-    }
-
-    return {
-      errors: foundErrors,
-      isValid: Object.keys(foundErrors).length === 0,
-    };
-  };
-
-  // Handler functions
   const handleInputChange = (e) => {
     const { name: key, value } = e.target;
     const oldState = deepClone(state);
     oldState[key].value = value;
-    oldState[key].error = "";
     setState({ ...oldState });
+  };
 
-    /* setState((prev) => {
-      console.log(prev);
-      return {
-        ...prev,
-        [key]: {
-          ...prev[key],
-          value: value,
-        },
-      };
-    }); */
+  const validateFields = (value) => {
+    const foundError = {};
+
+    const { title, bio, skills } = value;
+
+    if (!title.trim()) {
+      foundError["title"] = "Invalid title";
+    }
+    if (!bio.trim()) {
+      foundError["bio"] = "Invalid bio";
+    }
+    if (!skills.trim()) {
+      foundError["skills"] = "Invalid Skills";
+    }
+    return {
+      isValid: Object.keys(foundError).length === 0,
+      errors: foundError,
+    };
   };
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
-    // we are taking out state[title, bio, skills].value and adding them to new object
-    const values = Object.keys(state).reduce((accu, key) => {
-      accu[key] = state[key].value;
-      return accu;
-    }, {});
-    console.log(values);
 
-    const { errors, isValid } = validateFields(values);
-    console.log(errors);
-    console.log(isValid);
-    /* if (!isValid) {
-      setErrors(errors);
+    const values = objectFrom(state);
+    const { isValid, errors } = validateFields(values);
+
+    const updatedState = deepClone(state);
+
+    Object.keys(updatedState).forEach((key) => {
+      updatedState[key].error = errors[key] || "";
+    });
+
+    setState(updatedState);
+
+    if (isValid) {
+      console.log("Form is valid, submit it");
     }
-    const focuseKeys = Object.keys(focuses);
-    focuseKeys.forEach((key) => (focuses[key] = true)); */
   };
 
   const handleFocus = (e) => {
-    const { name: key, value } = e.target;
+    const { name: key } = e.target;
     const oldState = deepClone(state);
     oldState[key].focus = true;
-    setState(oldState);
+    setState({ ...oldState });
   };
 
   const handleBlur = (e) => {
-    const key = e.target.name;
+    const { name: key } = e.target;
+    const values = objectFrom(state);
 
-    const values = Object.keys(state).reduce((accu, key) => {
-      accu[key] = state[key].value;
-      return accu;
-    }, {});
-
-    const { errors } = validateFields(values);
+    const { isValid, errors } = validateFields(values);
 
     const oldState = deepClone(state);
-
     if (oldState[key].focus && errors[key]) {
       oldState[key].error = errors[key];
     } else {
       oldState[key].error = "";
     }
-    setState(oldState);
-
-    /* 
-    const { errors, isValid } = validateFields(formState);
-    // (!isValid) means validation found one or more errors in current formState
-    if (!isValid && focuses[key]) {
-      setErrors((prev) => ({ ...prev, [key]: errors[key] }));
-    } */
+    setState({ ...oldState });
   };
 
   useEffect(() => {
-    /* console.log("title: ", state["title"]);
-    console.log("bio: ", state["bio"]);
-    console.log("skills: ", state["skills"]); */
-    console.log(state);
+    // console.log(state);
   }, [state]);
 
   return (
@@ -148,7 +119,7 @@ const AppInputs = () => {
           <label htmlFor="bio">Bio:</label>
           <input
             type="text"
-            className={`${state.bio.error && state.title.focus ? "border-red-400" : "border-gray-300"}`}
+            className={`${state.bio.error && state.bio.focus ? "border-red-400" : "border-gray-300"}`}
             name="bio"
             placeholder="I am a software engineer..."
             value={state.bio.value}
