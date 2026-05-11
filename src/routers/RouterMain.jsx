@@ -21,6 +21,9 @@ import ApiCallOne from "../pages/projects/api-call-one/ApiCallOne";
 import AppInputs from "../pages/projects/app-inputs/AppInputs";
 import SimpleFocusGuard from "../pages/projects/app-inputs/SimpleFocusGuard";
 import FocusGuard2 from "../pages/projects/app-inputs/FocusGuard2";
+import Tasks from "../pages/projects/tasks/Tasks";
+import TimeZone from "../pages/projects/timezone/TimeZone";
+import GptTimezone from "../pages/projects/gpt-timezone/GptTimezone";
 
 const RouterMain = () => {
   const routerMain = createBrowserRouter([
@@ -28,6 +31,7 @@ const RouterMain = () => {
       path: "/",
       element: <LayoutMain />,
       children: [
+        // <Outlet/> for <LayoutMain/> starts
         { index: true, element: <Home /> },
 
         { path: "products", element: <Products /> },
@@ -61,10 +65,14 @@ const RouterMain = () => {
         { path: "text/api-call-one", element: <ApiCallOne /> },
 
         { path: "text/app-inputs", element: <AppInputs /> },
-        // { path: "text/app-inputs", element: <SimpleFocusGuard /> },
-        // { path: "text/app-inputs", element: <FocusGuard2 /> },
+
+        { path: "text/tasks-todo", element: <Tasks /> },
+
+        { path: "text/timezone", element: <TimeZone /> },
+        { path: "text/gpt-timezone", element: <GptTimezone /> },
 
         { path: "*", element: <NotFound /> },
+        // <Outlet/> for <LayoutMain/> ends
       ],
     },
   ]);

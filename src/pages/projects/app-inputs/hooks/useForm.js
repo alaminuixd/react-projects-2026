@@ -1,155 +1,165 @@
-import { useEffect, useState } from "react";
-import { deepClone, isObjEmpty } from "../utils/objectHelpers";
-import { validateFields } from "../utils/validateFields";
+import { useState } from "react";
 
-/* const params = {
-  init: {},
-  validate: (state) => {},
-}; */
+/**
+import { useState } from 'react';
+ * Factory for individual field logic.
+ * Merges the initial value with default and custom overrides.
+ */
+const createFieldState = (initialValue, override = {}) => ({
+  value: initialValue,
+  ...override,
+});
+
+/**
+ * Orchestrator to transform a raw data object into a structured form state.
+ * Includes safety checks to prevent crashes if arguments are missing.
+ */
+const createFormState = (
+  initialState,
+  fieldState = createFieldState, // Default to our factory
+  override = {},
+) => {
+  if (
+    !initialState ||
+    typeof initialState !== "object" ||
+    Array.isArray(initialState)
+  ) {
+    return {};
+  }
+
+  return Object.keys(initialState).reduce((acc, key) => {
+    // We execute the fieldState mapper for every key in the init object
+    acc[key] = fieldState(initialState[key], { ...override });
+    return acc;
+  }, {});
+};
+
+/**
+ * Orchestrator to transform a structured form state to a plaind key => value date object
+ */
+const mapStateToValues = (state) => {
+  const values = {};
+  const keys = Object.keys(state);
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    values[key] = state[key].value;
+  }
+  return values;
+};
+
+const runValidation = (state, validator) => {
+  if (typeof state !== "object" && Array.isArray(state)) {
+    throw new Error("state must be an object!");
+  }
+  if (typeof validator !== "function") {
+    throw new Error("Validator must be a function!");
+  }
+
+  const values = mapStateToValues(state);
+
+  const error = validator(values);
+  const hasError = Object.keys(error).length > 0;
+  return { error, hasError, values };
+};
 
 const useForm = ({ init, validate }) => {
-  const [state, setState] = useState(mapValuesToState(init));
+  // create state for the form
+  const [state, setState] = useState(
+    createFormState(init, createFieldState, {
+      error: "",
+      touched: false,
+      focused: false,
+    }),
+  );
 
-  const handleInputChange = (e) => {
-    const { name: key, value } = e.target;
-
-    const oldState = deepClone(state);
-    // console.log("oldState: ", oldState);
-    oldState[key].value = value;
-
-    const { errors } = getErrors();
-
-    if (oldState[key].touched && errors[key]) {
-      oldState[key].error = errors[key];
-    } else {
-      oldState[key] = "";
-    }
-
-    setState((prev) => ({ ...prev, ...oldState }));
-  };
-
-  /* const handleTouched = (e) => {
-    const { name: key } = e.target;
-    const oldState = deepClone(state);
-    oldState[key].touched = true;
-    setState(oldState);
-  }; */
-  const handleFocus = (e) => {
-    const { name: key } = e.target;
-    const oldState = deepClone(state);
-    oldState[key].focused = true;
-
-    if (!oldState[key].touched) {
-      oldState[key].touched = true;
-    }
-    setState(oldState);
-  };
-
-  const handleBlur = (e) => {
-    const { name: key } = e.target;
-    const values = mapStateToKeys(oldState, "value");
-
-    const { errors } = getErrors();
-
-    if (oldState[key].touched && errors[key]) {
-      oldState[key].error = errors[key];
-    } else {
-      oldState[key].error = "";
-    }
-
-    oldState[key].focused = false;
-
-    setState(oldState);
-  };
-
-  const handleInputSubmit = (e, cb) => {
-    e.preventDefault();
-    const { values, errors, hasError } = getErrors();
-    cb({
-      values,
-      errors,
-      hasError,
-      touched: mapStateToKeys(state, "touched"),
-      focused: mapStateToKeys(state, "focused"),
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setState((prev) => {
+      const next = {
+        ...prev,
+        [name]: {
+          ...prev[name],
+          value,
+        },
+      };
+      if (!prev[name].touched) return next;
+      const { error } = runValidation(next, validate);
+      console.log(error);
+      if (error) {
+        return {
+          ...next,
+          [name]: {
+            ...next[name],
+            error:
+              next[name].touched && !next[name].focused
+                ? error[name] || ""
+                : "",
+          },
+        };
+      }
+      return next;
     });
   };
 
-  const clear = () => {
-    const newState = mapValuesToState(init, true);
-    setState(newState);
+  const handleFocus = (e) => {
+    const { name } = e.target;
+    setState((prev) => ({
+      ...prev,
+      [name]: {
+        ...prev[name],
+        focused: true,
+        touched: true,
+        error: "",
+      },
+    }));
   };
 
-  const getErrors = () => {
-    let hasError = null,
-      errors = null;
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setState((prev) => {
+      const next = {
+        ...prev,
+        [name]: {
+          ...prev[name],
+          focused: false,
+        },
+      };
 
-    const values = mapStateToKeys(state, "values");
-    console.log("Values", values);
-
-    if (typeof validate === "boolean") {
-      hasError = validate;
-      errors = mapStateToKeys(state, "error");
-    } else if (typeof validate === "function") {
-      const errorsFromCB = validateFields(values);
-      console.log(errorsFromCB);
-      hasError = !isObjEmpty(errorsFromCB);
-      errors = errorsFromCB;
-    } else {
-      throw new Error("Validate must be boolean or function");
-    }
-
-    return { values, errors, hasError };
+      if (!next[name].touched) return next;
+      const error = validate(mapStateToValues(next));
+      return {
+        ...next,
+        [name]: {
+          ...next[name],
+          error:
+            next[name].touched && !next[name].focused ? error[name] || "" : "",
+        },
+      };
+    });
   };
 
-  return {
-    formState: state,
-    handleInputChange,
-    handleFocus,
-    handleBlur,
-    handleInputSubmit,
-    clear,
+  const handleSubmit = (e, cb) => {
+    e.preventDefault();
+    const { error, hasError, values } = runValidation(state, validate);
+    setState((prev) => {
+      const next = { ...prev };
+      for (const [name, errorValue] of Object.entries(error)) {
+        next[name] = {
+          ...next[name],
+          touched: true,
+          error: errorValue,
+        };
+      }
+      return next;
+    });
+    return cb(error, hasError, values);
   };
+
+  const handSub = (n, cb) => {
+    return cb(n);
+  };
+
+  return { state, handleInput, handleFocus, handleBlur, handleSubmit, handSub };
 };
 
 export default useForm;
-
-/**
- * Converts a plain object of values into a structured form state object.
- *
- * Each key is transformed into a field state containing:
- * value, error, focused, and touched properties.
- *
- * @param {Object.<string, *>} values - Initial form values
- *
- * @returns {FormState} Structured form state object
- *
- * @example
- * mapValuesToState({ email: "" });
- * // returns:
- * // {
- * //   email: {
- * //     value: "",
- * //     error: "",
- * //     focused: false,
- * //     touched: false
- * //   }
- * // }
- */
-export const mapValuesToState = (values, shouldClear = false) => {
-  return Object.keys(values).reduce((accu, key) => {
-    accu[key] = {
-      value: shouldClear ? "" : values[key],
-      error: "",
-      focused: false,
-      touched: false,
-    };
-    return accu;
-  }, {});
-};
-
-export const mapStateToKeys = (state, key) => {
-  return Object.keys(state).reduce((accu, curr) => {
-    accu[curr] = state[curr][key];
-    return accu;
-  }, {});
-};

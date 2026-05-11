@@ -1,98 +1,118 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import useForm from "./hooks/useForm";
-
 const init = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
 };
-
-const validate = (values) => {
-  const errors = {};
-  if (!values.firstName) {
-    errors["firstName"] = "First name is required!";
+const validate = (values = {}) => {
+  const error = {};
+  if (!values.firstName.trim()) {
+    error.firstName = "First name is required!";
   }
-  if (!values.lastName) {
-    errors["lastName"] = "Last name is required!";
+  if (!values.lastName.trim()) {
+    error.lastName = "Last name is required!";
   }
-  if (!values.email) {
-    errors["email"] = "Email name is required!";
+  if (!values.email.trim()) {
+    error.email = "Email is required!";
   }
-  if (!values.password) {
-    errors["password"] = "Password name is required!";
+  if (!values.password.trim()) {
+    error.password = "Password is required!";
   }
-
-  return errors;
+  return error;
 };
 
 const AppInputs = () => {
-  const {
-    formState,
-    handleInputChange,
-    handleFocus,
-    handleBlur,
-    handleInputSubmit,
-    clear,
-  } = useForm({
-    init,
-    validate,
-  });
+  // useForm custom hook
+  const { state, handleInput, handleFocus, handleBlur, handleSubmit, handSub } =
+    useForm({
+      init,
+      validate,
+    });
+
+  const submitCallBack = (error, hasError, values) => {
+    if (hasError) {
+      console.log("Error: ", error);
+    }
+    console.log("Values: ", values);
+  };
 
   useEffect(() => {
-    // console.log(formState);
-  }, [formState]);
+    const result = handSub(10, (n) => n * 20);
+    console.log(result);
+  }, []);
 
   return (
     <div className="app-inputs-container">
       <h1>App Inputs</h1>
-      <form onSubmit={handleInputSubmit}>
+      <form onSubmit={(e) => handleSubmit(e, submitCallBack)}>
         {/* First Name */}
         <div>
-          <label htmlFor="firstName">First name:</label>
+          <label>First name:</label>
           <input
             type="text"
             name="firstName"
             placeholder="Your First Name"
-            value={formState.firstName?.value}
-            onChange={handleInputChange}
+            value={state.firstName.value}
+            onFocus={handleFocus}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
+          {state.firstName.error && (
+            <p className="error-message">{state.firstName.error}</p>
+          )}
         </div>
 
         {/* Last Name */}
         <div>
-          <label htmlFor="lastName">First name:</label>
+          <label>Last name:</label>
           <input
             type="text"
             name="lastName"
             placeholder="Your Last Name"
-            value={formState.lastName?.value}
-            onChange={handleInputChange}
+            value={state.lastName.value}
+            onFocus={handleFocus}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
+          {state.lastName.error && (
+            <p className="error-message">{state.lastName.error}</p>
+          )}
         </div>
 
         {/* Email */}
         <div>
-          <label htmlFor="email">Email:</label>
+          <label>Email:</label>
           <input
             type="email"
             name="email"
             placeholder="example@gmail.com"
-            value={formState.email?.value}
-            onChange={handleInputChange}
+            value={state.email.value}
+            onFocus={handleFocus}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
+          {state.email.error && (
+            <p className="error-message">{state.email.error}</p>
+          )}
         </div>
 
         {/* Password */}
         <div>
-          <label htmlFor="password">Password:</label>
+          <label>Password:</label>
           <input
             type="text"
             name="password"
             placeholder="******** (8 characters)"
-            value={formState.password?.value}
-            onChange={handleInputChange}
+            value={state.password.value}
+            onFocus={handleFocus}
+            onChange={handleInput}
+            onBlur={handleBlur}
           />
+          {state.password.error && (
+            <p className="error-message">{state.password.error}</p>
+          )}
         </div>
 
         <button className="btn-blue">Submit</button>

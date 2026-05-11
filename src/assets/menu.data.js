@@ -23,12 +23,15 @@ export const menus = [
   { id: 22, text: "Custom Hooks", link: "text/custom-hooks" },
   { id: 23, text: "API Call One", link: "text/api-call-one" },
   { id: 24, text: "App Inputs", link: "text/app-inputs" },
+  { id: 25, text: "Tasks To Do", link: "text/tasks-todo" },
+  { id: 26, text: "GPT Time Zone", link: "text/gpt-timezone" },
+  { id: 27, text: "Time Zone", link: "text/timezone" },
 ];
 
 export const childrenMap = [
   { id: 2, children: [3, 4] },
   { id: 3, children: [5, 6] },
   { id: 4, children: [7, 8, 9] },
-  { id: 11, children: [12, 13] },
-  { id: 16, children: [17, 18, 19, 20, 21, 22, 23, 24] },
+  { id: 11, children: [12, 13, 26, 27] },
+  { id: 16, children: [17, 18, 19, 20, 21, 22, 23, 24, 25] },
 ];

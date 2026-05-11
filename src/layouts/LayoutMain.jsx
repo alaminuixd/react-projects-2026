@@ -12,6 +12,7 @@ const LayoutMain = () => {
   // menu tree
   const menuTree = useMemo(() => buildMenuTree(menus, childrenMap), []);
   // console.log(menuTree.map((m) => m.text));
+  // console.log(menuTree);
   return (
     <div className="containerMain">
       <header className="topHeader">

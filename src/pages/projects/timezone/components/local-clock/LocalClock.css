@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer components {
+  /* .single-clock {
+    @apply font-normal;
+  } */
+}

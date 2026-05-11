@@ -1,4 +1,4 @@
-import ButtonSystem from "./components/ButtonSystem.js";
+import ButtonSystem from "../components/ButtonSystem.js";
 
 const container = document.getElementById("container");
 const filterUL = document.createElement("ul");

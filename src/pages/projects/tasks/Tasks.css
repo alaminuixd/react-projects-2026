@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@layer components {
+  .tasks-todo-container {
+    @apply w-full max-w-2xl mx-auto my-10;
+  }
+  .tasks-todo-container h1 {
+    @apply text-3xl my-10 text-center font-medium text-gray-600;
+  }
+  .tasks-todo-container form {
+    @apply p-0;
+  }
+  .tasks-todo-container form > div {
+    @apply flex flex-col my-5 px-7 py-5 shadow-[0_0_2px_rgba(0,0,0,0.2)] rounded-md;
+  }
+  .tasks-todo-container form > div > label {
+    @apply font-medium text-gray-600;
+  }
+  .tasks-todo-container form > div > input[type="text"] {
+    @apply px-5 py-2 border border-gray-300 mt-2;
+  }
+  .tasks-todo-container form > div > input::placeholder {
+    @apply text-gray-400 font-light;
+  }
+  .tasks-todo-container form .error-message {
+    @apply text-red-600 text-sm pt-2;
+  }
+}
