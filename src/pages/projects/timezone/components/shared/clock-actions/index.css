@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@layer components {
+  .btn-action-red {
+    @apply bg-red-600 text-white px-10 py-2 rounded-full;
+  }
+  .btn-action-blue {
+    @apply bg-blue-600 text-white px-10 py-2 rounded-full;
+  }
+}

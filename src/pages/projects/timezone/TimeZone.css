@@ -13,15 +13,6 @@
   .btn-create {
     @apply bg-blue-600 text-white px-10 py-2 rounded;
   }
-  .btn-update {
-    @apply bg-green-600 text-white px-10 py-2 rounded;
-  }
-  .btn-edit {
-    @apply bg-red-600 text-white px-10 py-2 rounded;
-  }
-  .btn-delete {
-    @apply bg-red-600 text-white px-10 py-2 rounded;
-  }
   /* 
   Button Style Ends
   */

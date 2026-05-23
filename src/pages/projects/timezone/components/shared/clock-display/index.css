@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@layer components {
+  .clock-display-container {
+    @apply px-10 py-5 my-5 bg-gray-800 rounded;
+  }
+}

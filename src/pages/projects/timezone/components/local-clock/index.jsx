@@ -3,7 +3,7 @@ import ClockDisplay from "../shared/clock-display";
 import useClock from "../../hooks/useClock";
 import "./LocalClock.css";
 import { useEffect } from "react";
-const LocalClock = ({ clock, updateClock }) => {
+const LocalClock = ({ clock, updateClock, createClock }) => {
   const { date, timezone, offset } = useClock(clock.timezone, clock.offset);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const LocalClock = ({ clock, updateClock }) => {
   }, [date]);
 
   useEffect(() => {
-    console.log("Local Clock: ", timezone);
+    // console.log("Local Clock: ", timezone);
   }, [timezone]);
 
   return (
@@ -31,7 +31,12 @@ const LocalClock = ({ clock, updateClock }) => {
       ) : (
         <h1>No Local Date found</h1>
       )}
-      <ClockActions local={true} clock={clock} updateClock={updateClock} />
+      <ClockActions
+        local={true}
+        clock={clock}
+        updateClock={updateClock}
+        createClock={createClock}
+      />
     </div>
   );
 };

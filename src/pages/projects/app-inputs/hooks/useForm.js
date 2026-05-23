@@ -140,7 +140,8 @@ const useForm = ({ init, validate }) => {
 
   const handleSubmit = (e, cb) => {
     e.preventDefault();
-    const { error, hasError, values } = runValidation(state, validate);
+    const plainValues = mapStateToValues(state);
+    const { error, hasError, values } = runValidation(plainValues, validate);
     setState((prev) => {
       const next = { ...prev };
       for (const [name, errorValue] of Object.entries(error)) {

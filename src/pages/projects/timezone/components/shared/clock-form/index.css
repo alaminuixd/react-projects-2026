@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@layer components {
+  .clock-form-wrapper {
+    @apply bg-[#1b1b1b] p-5 mb-2;
+  }
+  .clock-form-wrapper form > div {
+    @apply flex items-center gap-2 my-3;
+  }
+  .clock-form-wrapper input,
+  .clock-form-wrapper select {
+    @apply bg-[#333];
+  }
+  .clock-form-wrapper select {
+    @apply px-3 py-1;
+  }
+  .btn-form-blue {
+    @apply bg-blue-600 text-white px-10 py-2 rounded-full;
+  }
+}
